@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploycrm-app
+  labels:
+    app: deploycrm-app
+spec:
+  replicas: 2  # Number of instances to run
+  selector:
+    matchLabels:
+      app: deploycrm-app
+  template:
+    metadata:
+      labels:
+        app: deploycrm-app
+    spec:
+      containers:
+      - name: deploycrm-container
+        image: deploycrm:v1  # Your Docker image
+        ports:
+        - containerPort: 8080  # The port your app listens on
+        env:
+        - name: DATABASE_URL
+          value: "your-database-url"  # Replace with actual database URL
+        - name: REDIS_URL
+          value: "your-redis-url"  # Replace with actual Redis URL
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
