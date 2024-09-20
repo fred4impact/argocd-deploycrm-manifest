@@ -19,8 +19,4 @@ spec:
         image: runtesting/deploycrm:v2
         ports:
         - containerPort: 8080
-        env:
-        - name: DATABASE_URL
-          value: "postgres://username:password@db-host:5432/dbname"
-        - name: REDIS_URL
-          value: "redis://redis-service:6379"
+        
