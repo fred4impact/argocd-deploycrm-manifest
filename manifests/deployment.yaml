@@ -1,33 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deploycrm-app
+  name: crm-deployment
   labels:
-    app: deploycrm-app
+    app: crm
 spec:
-  replicas: 2  # Number of instances to run
+  replicas: 2
   selector:
     matchLabels:
-      app: deploycrm-app
+      app: crm
   template:
     metadata:
       labels:
-        app: deploycrm-app
+        app: crm
     spec:
       containers:
-      - name: deploycrm-container
-        image: deploycrm:v1  # Your Docker image
+      - name: crm-app
+        image: runtesting/deploycrm:v2
         ports:
-        - containerPort: 8080  # The port your app listens on
+        - containerPort: 8080
         env:
         - name: DATABASE_URL
-          value: "your-database-url"  # Replace with actual database URL
+          value: "postgres://username:password@db-host:5432/dbname"
         - name: REDIS_URL
-          value: "your-redis-url"  # Replace with actual Redis URL
-        resources:
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
-          requests:
-            memory: "256Mi"
-            cpu: "250m"
+          value: "redis://redis-service:6379"
