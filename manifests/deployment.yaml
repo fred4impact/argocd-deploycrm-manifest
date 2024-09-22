@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: crm-app
-        image: runtesting/deploycrm:v2
+        image: runtesting/deploycrm:v1
         ports:
         - containerPort: 8080
         
